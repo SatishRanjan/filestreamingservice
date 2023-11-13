@@ -1,8 +1,10 @@
 # File Streaming Service and Client
 A sample multi threaded file streaming service written in C# dotnet6 using Berkely Socket API. The received bytes stream is written as its received from the server, completely avoiding the complete file memory buffering!
+<br>
+<br> The streaming service listens on port 8088 for the connection from the client.
 
 ## Supported OS
-Cross Platform, for Linux build targetting Linux
+Cross Platform, for Linux build targetting Linux.
 
 ## Service Architecture
 

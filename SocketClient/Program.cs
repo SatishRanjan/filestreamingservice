@@ -12,6 +12,7 @@ namespace SocketClient
         private static string SERVER_HOST = "127.0.0.1";
         private static int BUFFER_SIZE = 4096;
         private static IPEndPoint _endPoint;
+        private static string _endOfDataDelimiter = "\r\n";
 
         static async Task Main(string[] args)
         {
@@ -44,7 +45,7 @@ namespace SocketClient
             try
             {
                 serverSocket.Connect(_endPoint);
-                serverSocket.Send(Encoding.UTF8.GetBytes($"{fileNameToDownload}\r\n"));
+                serverSocket.Send(Encoding.UTF8.GetBytes($"{fileNameToDownload}{_endOfDataDelimiter}"));
 
                 // File path and name where the file will be downloaded
                 var destFilePath = GetDestinationFilePath(fileNameToDownload);

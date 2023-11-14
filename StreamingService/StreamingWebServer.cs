@@ -33,12 +33,6 @@ namespace StreamingService
                 Socket clientSocket = await _serverSocket.AcceptAsync();
                 Console.WriteLine($"A new client {((IPEndPoint)clientSocket.RemoteEndPoint)?.Address.ToString()} is connected at {DateTime.UtcNow.ToString("O")}");
 
-                // Send string byte streams
-                //clientSocket.Send(Encoding.UTF8.GetBytes("Hello from local streaming server"));
-
-                // Send bytes as http response
-                // clientSocket.Send(Encoding.UTF8.GetBytes(GetHttpResponseString(200, "OK", "Hello from local streaming server", "text/html")));
-
                 // send the file on a seperate thread
                 _ = Task.Run(() => SendFileStream(clientSocket));
             }

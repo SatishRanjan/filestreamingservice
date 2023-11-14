@@ -105,25 +105,6 @@ namespace StreamingService
             return receivedString;
         }
 
-        private static string GetHttpResponseString(int statusCode, string statusName, string content, string contentType)
-        {
-            string currentDateTime = DateTime.UtcNow.ToString();
-            string statusHeader = "HTTP/1.1" + " " + statusCode + " " + statusName + "\r\n";
-            string dateHeader = "Date: " + currentDateTime + "\r\n";
-            string serverHeader = "Server: Local Streaming Server" + "\r\n";
-
-            string responseStr = statusHeader + dateHeader + serverHeader;
-            if (string.IsNullOrEmpty(content))
-            {
-                return responseStr + "\r\n";
-            }
-
-            string contentTypeHeader = $"Content-Type: {contentType}\r\n";
-            string contentLengthHeader = "Content-Length: " + content.Length + "\r\n\r\n";
-            responseStr = responseStr + contentTypeHeader + contentLengthHeader;
-            return responseStr + content;
-        }
-
         private static string GetFileToDownloadPath(string fileToDownload)
         {
             // Get the directory name of executing assembly

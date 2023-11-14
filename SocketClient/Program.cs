@@ -36,7 +36,7 @@ namespace SocketClient
             await Task.WhenAll(tasks);
             sw.Stop();
 
-            Console.WriteLine($"Downaloaded all files in {sw.ElapsedMilliseconds} milliseconds, downloaded files location: {GetDestinationFilePath(fileNameToDownload)}");
+            Console.WriteLine($"Downaloaded all files in {sw.ElapsedMilliseconds} milliseconds");
             Console.Read();
         }
 
@@ -59,6 +59,8 @@ namespace SocketClient
                         destFs.Write(buffer, 0, bytesRead);
                     }
                 }
+
+                Console.WriteLine($"Downaloaded file: {destFilePath}");
             }
             catch (Exception ex)
             {

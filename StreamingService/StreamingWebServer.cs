@@ -28,6 +28,7 @@ namespace StreamingService
 
             Console.WriteLine($"Streaming server started listening for the client connection on server port: {_serverPort}");
 
+            // Server keeps running(waiting) for an incoming client connection
             while (true)
             {
                 Socket clientSocket = await _serverSocket.AcceptAsync();
@@ -40,9 +41,11 @@ namespace StreamingService
 
         private void SendFileStream(Socket clientSocket)
         {
+            // Client is requesting to stream this file from the server.
             string requestedFileName = GetTheRequestedFileName(clientSocket);
             Console.WriteLine($"requested filename: {requestedFileName}");
-         
+            
+            // Local the requested file path on the server
             var sourceFilePath = GetFileToDownloadPath(requestedFileName);
 
             if (string.IsNullOrEmpty(requestedFileName) || !File.Exists(sourceFilePath))
@@ -57,6 +60,8 @@ namespace StreamingService
             {
                 Stopwatch sw = new();
                 sw.Start();
+
+                // Start sending the file bytes stream as it's being read on the server
                 using (FileStream sourceFs = new(sourceFilePath, FileMode.Open, FileAccess.Read))
                 {
                     byte[] buffer = new byte[2048];
